@@ -76,9 +76,7 @@ static uint8_t st_validator_testAntenna_AgcVal_FixedNfcLd(
 static uint8_t st_validator_testAntenna_AgcVal_Differential(
     nci_data_t* exp, phTmlNfc_TransactInfo_t* act);
 
-NFCSTATUS phNxpNciHal_getPrbsCmd(phNxpNfc_PrbsType_t prbs_type,
-                                 phNxpNfc_PrbsHwType_t hw_prbs_type,
-                                 uint8_t tech, uint8_t bitrate,
+NFCSTATUS phNxpNciHal_getPrbsCmd(uint8_t tech, uint8_t bitrate,
                                  uint8_t* prbs_cmd, uint8_t prbs_cmd_len);
 /* Test data to validate SWP line 2*/
 static nci_test_data_t swp2_test_data[] = {
@@ -86,7 +84,7 @@ static nci_test_data_t swp2_test_data[] = {
          0x04, {0x20, 0x00, 0x01, 0x00} /* cmd */
      },
      {
-         0x06, {0x40, 0x00, 0x03, 0x00, 0x11, 0x00} /* exp_rsp */
+         0x06, {0x40, 0x00, 0x03, 0x00, 0x10, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -94,10 +92,10 @@ static nci_test_data_t swp2_test_data[] = {
      st_validator_testEquals, /* validator */
      st_validator_null},
     {{
-         0x05, {0x20, 0x01, 0x02, 0x00, 0x00} /* cmd */
+         0x03, {0x20, 0x01, 0x00} /* cmd */
      },
      {
-         0x4, {0x40, 0x01, 0x19, 0x00} /* exp_rsp */
+         0x4, {0x40, 0x01, 0x17, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -136,7 +134,7 @@ static nci_test_data_t swp1_test_data[] = {
          0x04, {0x20, 0x00, 0x01, 0x00} /* cmd */
      },
      {
-         0x06, {0x40, 0x00, 0x03, 0x00, 0x11, 0x00} /* exp_rsp */
+         0x06, {0x40, 0x00, 0x03, 0x00, 0x10, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -144,10 +142,10 @@ static nci_test_data_t swp1_test_data[] = {
      st_validator_testEquals, /* validator */
      st_validator_null},
     {{
-         0x05, {0x20, 0x01, 0x02, 0x00, 0x00} /* cmd */
+         0x03, {0x20, 0x01, 0x00} /* cmd */
      },
      {
-         0x4, {0x40, 0x01, 0x19, 0x00} /* exp_rsp */
+         0x4, {0x40, 0x01, 0x17, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -184,7 +182,7 @@ static nci_test_data_t prbs_test_data[] = {
          0x04, {0x20, 0x00, 0x01, 0x00} /* cmd */
      },
      {
-         0x06, {0x40, 0x00, 0x03, 0x00, 0x11, 0x00} /* exp_rsp */
+         0x06, {0x40, 0x00, 0x03, 0x00, 0x10, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -192,22 +190,10 @@ static nci_test_data_t prbs_test_data[] = {
      st_validator_testEquals, /* validator */
      st_validator_null},
     {{
-         0x05, {0x20, 0x01, 0x02, 0x00, 0x00} /* cmd */
+         0x03, {0x20, 0x01, 0x00} /* cmd */
      },
      {
-         0x4, {0x40, 0x01, 0x19, 0x00} /* exp_rsp */
-     },
-     {
-         0x00, {0x00} /* ext_ntf */
-     },
-     st_validator_testEquals, /* validator */
-     st_validator_null
-    },
-    {{
-         0x04, {0x2F, 0x00, 0x01, 0x00} /* cmd */
-     },
-     {
-         0x04, {0x4F, 0x00, 0x01, 0x00} /* exp_rsp */
+         0x4, {0x40, 0x01, 0x17, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -222,7 +208,7 @@ static nci_test_data_t rf_field_on_test_data[] = {
          0x04, {0x20, 0x00, 0x01, 0x00} /* cmd */
      },
      {
-         0x06, {0x40, 0x00, 0x03, 0x00, 0x11, 0x00} /* exp_rsp */
+         0x06, {0x40, 0x00, 0x03, 0x00, 0x10, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -230,21 +216,10 @@ static nci_test_data_t rf_field_on_test_data[] = {
      st_validator_testEquals, /* validator */
      st_validator_null},
     {{
-         0x05, {0x20, 0x01, 0x02, 0x00, 0x00} /* cmd */
+         0x03, {0x20, 0x01, 0x00} /* cmd */
      },
      {
-         0x4, {0x40, 0x01, 0x19, 0x00} /* exp_rsp */
-     },
-     {
-         0x00, {0x00} /* ext_ntf */
-     },
-     st_validator_testEquals, /* validator */
-     st_validator_null},
-    {{
-         0x03, {0x2F, 0x02, 0x00} /* cmd */
-     },
-     {
-         0x04, {0x4F, 0x02, 0x05, 0x00} /* exp_rsp */
+         0x4, {0x40, 0x01, 0x17, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -252,33 +227,10 @@ static nci_test_data_t rf_field_on_test_data[] = {
      st_validator_testEquals, /* validator */
      st_validator_null},
     {{
-         0x04, {0x2F, 0x00, 0x01, 0x00} /* cmd */
-     },
-     {
-         0x04, {0x4F, 0x00, 0x01, 0x00} /* exp_rsp */
-     },
-     {
-         0x00, {0x00} /* ext_ntf */
-     },
-     st_validator_testEquals, /* validator */
-     st_validator_null},
-    {{
-         0x05, {0x2F, 0x3D, 0x02, 0x20, 0x01} /* cmd */
+         0x08, {0x2F, 0x3D, 0x05, 0x20, 0x01, 0x00, 0x00, 0x00} /* cmd */
      },
      {
          0x04, {0x4F, 0x3D, 0x05, 0x00} /* exp_rsp */
-     },
-     {
-         0x00, {0x00} /* ext_ntf */
-     },
-     st_validator_testEquals, /* validator */
-     st_validator_null
-    },
-    {{
-         0x04, {0x2F, 0x00, 0x01, 0x01} /* cmd */
-     },
-     {
-         0x04, {0x4F, 0x00, 0x01, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -292,7 +244,7 @@ static nci_test_data_t rf_field_off_test_data[] = {
          0x04, {0x20, 0x00, 0x01, 0x00} /* cmd */
      },
      {
-         0x06, {0x40, 0x00, 0x03, 0x00, 0x11, 0x00} /* exp_rsp */
+         0x06, {0x40, 0x00, 0x03, 0x00, 0x10, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -300,21 +252,10 @@ static nci_test_data_t rf_field_off_test_data[] = {
      st_validator_testEquals, /* validator */
      st_validator_null},
     {{
-         0x05, {0x20, 0x01, 0x02, 0x00, 0x00} /* cmd */
+         0x03, {0x20, 0x01, 0x00} /* cmd */
      },
      {
-         0x4, {0x40, 0x01, 0x19, 0x00} /* exp_rsp */
-     },
-     {
-         0x00, {0x00} /* ext_ntf */
-     },
-     st_validator_testEquals, /* validator */
-     st_validator_null},
-    {{
-         0x03, {0x2F, 0x02, 0x00} /* cmd */
-     },
-     {
-         0x04, {0x4F, 0x02, 0x05, 0x00} /* exp_rsp */
+         0x4, {0x40, 0x01, 0x17, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -322,33 +263,10 @@ static nci_test_data_t rf_field_off_test_data[] = {
      st_validator_testEquals, /* validator */
      st_validator_null},
     {{
-         0x04, {0x2F, 0x00, 0x01, 0x00} /* cmd */
-     },
-     {
-         0x04, {0x4F, 0x00, 0x01, 0x00} /* exp_rsp */
-     },
-     {
-         0x00, {0x00} /* ext_ntf */
-     },
-     st_validator_testEquals, /* validator */
-     st_validator_null},
-    {{
-         0x05, {0x2F, 0x3D, 0x02, 0x20, 0x00} /* cmd */
+         0x08, {0x2F, 0x3D, 0x05, 0x20, 0x00, 0x00, 0x00, 0x00} /* cmd */
      },
      {
          0x04, {0x4F, 0x3D, 0x05, 0x00} /* exp_rsp */
-     },
-     {
-         0x00, {0x00} /* ext_ntf */
-     },
-     st_validator_testEquals, /* validator */
-     st_validator_null
-    },
-    {{
-         0x04, {0x2F, 0x00, 0x01, 0x01} /* cmd */
-     },
-     {
-         0x04, {0x4F, 0x00, 0x01, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -363,7 +281,7 @@ static nci_test_data_t download_pin_test_data1[] = {
          0x04, {0x20, 0x00, 0x01, 0x00} /* cmd */
      },
      {
-         0x06, {0x40, 0x00, 0x03, 0x00, 0x11, 0x00} /* exp_rsp */
+         0x06, {0x40, 0x00, 0x03, 0x00, 0x10, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -392,7 +310,7 @@ static nci_test_data_t antenna_self_test_data[] = {
          0x04, {0x20, 0x00, 0x01, 0x00} /* cmd */
      },
      {
-         0x06, {0x40, 0x00, 0x03, 0x00, 0x11, 0x00} /* exp_rsp */
+         0x06, {0x40, 0x00, 0x03, 0x00, 0x10, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -400,10 +318,10 @@ static nci_test_data_t antenna_self_test_data[] = {
      st_validator_testEquals, /* validator */
      st_validator_null},
     {{
-         0x05, {0x20, 0x01, 0x02, 0x00, 0x00} /* cmd */
+         0x03, {0x20, 0x01, 0x00} /* cmd */
      },
      {
-         0x4, {0x40, 0x01, 0x19, 0x00} /* exp_rsp */
+         0x4, {0x40, 0x01, 0x17, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -415,17 +333,6 @@ static nci_test_data_t antenna_self_test_data[] = {
      },
      {
          0x04, {0x4F, 0x02, 0x05, 0x00} /* exp_rsp */
-     },
-     {
-         0x00, {0x00} /* ext_ntf */
-     },
-     st_validator_testEquals, /* validator */
-     st_validator_null},
-    {{
-         0x04, {0x2F, 0x00, 0x01, 0x00} /* cmd */
-     },
-     {
-         0x04, {0x4F, 0x00, 0x01, 0x00} /* exp_rsp */
      },
      {
          0x00, {0x00} /* ext_ntf */
@@ -446,7 +353,7 @@ static nci_test_data_t antenna_self_test_data[] = {
      st_validator_null},
     {{
          0x07,
-         {0x2F, 0x3D, 0x04, 0x02, 0xC8, 0x60, 0x03} /* AGC measurement cmd */
+         {0x2F, 0x3D, 0x04, 0x02, 0xCD, 0x60, 0x03} /* AGC measurement cmd */
      },
      {
          0x03, {0x4F, 0x3D, 05} /* exp_rsp */
@@ -481,18 +388,6 @@ static nci_test_data_t antenna_self_test_data[] = {
          0x00, {0x00} /* ext_ntf */
      },
      st_validator_testAntenna_AgcVal_Differential,
-     st_validator_null
-    },
-    {{
-         0x04, {0x2F, 0x00, 0x01, 0x01} /* cmd */
-     },
-     {
-         0x04, {0x4F, 0x00, 0x01, 0x00} /* exp_rsp */
-     },
-     {
-         0x00, {0x00} /* ext_ntf */
-     },
-     st_validator_testEquals, /* validator */
      st_validator_null
     }};
 
@@ -1349,9 +1244,8 @@ NFCSTATUS phNxpNciHal_SwpTest(uint8_t swp_line) {
  **
  ******************************************************************************/
 
-NFCSTATUS phNxpNciHal_PrbsTestStart(phNxpNfc_PrbsType_t prbs_type,
-                                    phNxpNfc_PrbsHwType_t hw_prbs_type,
-                                    phNxpNfc_Tech_t tech,
+
+NFCSTATUS phNxpNciHal_PrbsTestStart(phNxpNfc_Tech_t tech,
                                     phNxpNfc_Bitrate_t bitrate)
 {
   NFCSTATUS status = NFCSTATUS_FAILED;
@@ -1359,7 +1253,7 @@ NFCSTATUS phNxpNciHal_PrbsTestStart(phNxpNfc_PrbsType_t prbs_type,
   nci_test_data_t prbs_cmd_data;
 
   uint8_t rsp_cmd_info[] = {0x4F, 0x30, 0x01, 0x00};
-  prbs_cmd_data.cmd.len = 0x09;
+  prbs_cmd_data.cmd.len = 0x07;
 
   memcpy(prbs_cmd_data.exp_rsp.p_data, &rsp_cmd_info[0], sizeof(rsp_cmd_info));
   prbs_cmd_data.exp_rsp.len = sizeof(rsp_cmd_info);
@@ -1374,9 +1268,8 @@ NFCSTATUS phNxpNciHal_PrbsTestStart(phNxpNfc_PrbsType_t prbs_type,
 
 //    [NCI] -> [0x2F 0x30 0x04 0x00 0x00 0x01 0xFF]
 
-  status =
-      phNxpNciHal_getPrbsCmd(prbs_type, hw_prbs_type, tech, bitrate,
-                             prbs_cmd_data.cmd.p_data, prbs_cmd_data.cmd.len);
+  status = phNxpNciHal_getPrbsCmd(tech, bitrate, prbs_cmd_data.cmd.p_data,
+                                  prbs_cmd_data.cmd.len);
 
   if (status == NFCSTATUS_FAILED) {
     // Invalid Param.
@@ -1448,9 +1341,8 @@ NFCSTATUS phNxpNciHal_PrbsTestStop() {
 ** Returns          NFCSTATUS_SUCCESS if successful,otherwise NFCSTATUS_FAILED.
 **
 *******************************************************************************/
-NFCSTATUS phNxpNciHal_getPrbsCmd(phNxpNfc_PrbsType_t prbs_type,
-                                 phNxpNfc_PrbsHwType_t hw_prbs_type,
-                                 uint8_t tech, uint8_t bitrate,
+
+NFCSTATUS phNxpNciHal_getPrbsCmd(uint8_t tech, uint8_t bitrate,
                                  uint8_t* prbs_cmd, uint8_t prbs_cmd_len)
 {
   NFCSTATUS status = NFCSTATUS_SUCCESS;
@@ -1460,23 +1352,22 @@ NFCSTATUS phNxpNciHal_getPrbsCmd(phNxpNfc_PrbsType_t prbs_type,
   NXPLOG_NCIHAL_D("phNxpNciHal_getPrbsCmd - tech 0x%x bitrate = 0x%x", tech,
                   bitrate);
   if (NULL == prbs_cmd ||
-      prbs_cmd_len != 0x09)
+      prbs_cmd_len !=  0x07)
   {
     return status;
   }
 
   prbs_cmd[0] = 0x2F;
   prbs_cmd[1] = 0x30;
-  prbs_cmd[2] = 0x06;
-  prbs_cmd[3] = (uint8_t)prbs_type;
+  prbs_cmd[2] = 0x04;
   // 0xFF Error value used for validation.
-  prbs_cmd[4] = (uint8_t)hw_prbs_type;
-  prbs_cmd[5] = 0xFF;  // TECH
-  prbs_cmd[6] = 0xFF;  // BITRATE
-  prbs_cmd[7] = 0x01;
-  prbs_cmd[8] = 0xFF;
-  position_tech_param = 5;
-  position_bit_param = 6;
+  prbs_cmd[3] = 0xFF;  // TECH
+  // 0xFF Error value used for validation.
+  prbs_cmd[4] = 0xFF;  // BITRATE
+  prbs_cmd[5] = 0x01;
+  prbs_cmd[6] = 0xFF;
+  position_tech_param = 3;
+  position_bit_param = 4;
 
   switch (tech) {
     case NFC_RF_TECHNOLOGY_A:

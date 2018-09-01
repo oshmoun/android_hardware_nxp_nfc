@@ -176,6 +176,7 @@ static NFCSTATUS phNxpNciHal_fw_seq_handler(
 static NFCSTATUS (*phNxpNciHal_dwnld_seqhandler[])(void* pContext,
                                                    NFCSTATUS status,
                                                    void* pInfo) = {
+    phNxpNciHal_fw_dnld_normal, phNxpNciHal_fw_dnld_normal,
     phNxpNciHal_fw_dnld_get_sessn_state, phNxpNciHal_fw_dnld_get_version,
     phNxpNciHal_fw_dnld_log_read, phNxpNciHal_fw_dnld_write,
     phNxpNciHal_fw_dnld_get_sessn_state, phNxpNciHal_fw_dnld_get_version,
@@ -524,7 +525,8 @@ static void phNxpNciHal_fw_dnld_get_version_cb(void* pContext, NFCSTATUS status,
       if ((PHDNLDNFC_HWVER_MRA2_1 == bHwVer) ||
           (PHDNLDNFC_HWVER_MRA2_2 == bHwVer) ||
           ((nfcFL.chipType == pn551) &&
-           (PHDNLDNFC_HWVER_PN551_MRA1_0 == bHwVer)) ||
+           ((PHDNLDNFC_HWVER_PN551_MRA1_0 == bHwVer) ||
+           (PHDNLDNFC_HWVER_PN548AD_MRA1_0 == bHwVer))) ||
           (((nfcFL.chipType == pn553) || (nfcFL.chipType == pn557)) &&
            (PHDNLDNFC_HWVER_PN553_MRA1_0 == bHwVer ||
             PHDNLDNFC_HWVER_PN553_MRA1_0_UPDATED & pRespBuff->pBuff[0]))) {
@@ -1698,7 +1700,7 @@ NFCSTATUS phNxpNciHal_fw_download_seq(uint8_t bClkSrcVal, uint8_t bClkFreqVal) {
   /* Get firmware version */
   if (NFCSTATUS_SUCCESS == phDnldNfc_InitImgInfo()) {
     NXPLOG_FWDNLD_D("phDnldNfc_InitImgInfo:SUCCESS");
-    if (gRecFWDwnld == true) {
+    if ((gRecFWDwnld == true) && (nfcFL.chipType != pn547C2)) {
       status =
           phNxpNciHal_fw_seq_handler(phNxpNciHal_dummy_rec_dwnld_seqhandler);
     } else {
