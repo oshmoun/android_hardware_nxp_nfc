@@ -118,10 +118,9 @@ NFCSTATUS phNxpNciHal_SwpTest(uint8_t swp_line);
  **                  otherwise NFCSTATUS_FAILED.
  **
  ******************************************************************************/
-NFCSTATUS phNxpNciHal_PrbsTestStart(phNxpNfc_PrbsType_t prbs_type,
-                                    phNxpNfc_PrbsHwType_t hw_prbs_type,
-                                    phNxpNfc_Tech_t tech,
+NFCSTATUS phNxpNciHal_PrbsTestStart(phNxpNfc_Tech_t tech,
                                     phNxpNfc_Bitrate_t bitrate);
+
 /*******************************************************************************
  **
  ** Function         phNxpNciHal_PrbsTestStop
